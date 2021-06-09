@@ -1,0 +1,47 @@
+[
+    {
+        "id": "1",
+        "name": "Apple Juice",
+        "price": 3.5,
+        "availablity": 100,
+        "size": "200 mL",
+        "description": "Our signature 100% Fresh Apple juice is a pure, natural juice brought to you straight from the fruit, it's unlike any other.",
+        "calories": 100
+    },
+    {
+        "id": "2",
+        "name": "Lemon Juice",
+        "price": 5.5,
+        "availablity": 100,
+        "size": "200 mL",
+        "description": "Our signature 100% Fresh Lemon juice is a pure, natural juice brought to you straight from the fruit, it's unlike any other.",
+        "calories": 60
+    },
+    {
+        "id": "3",
+        "name": "Grapes Juice",
+        "price": 4.5,
+        "availablity": 100,
+        "size": "200 mL",
+        "description": "Our signature 100% Fresh Grapes juice is a pure, natural juice brought to you straight from the fruit, it's unlike any other.",
+        "calories": 70
+    },
+    {
+        "id": "4",
+        "name": "Cherry Juice",
+        "price": 3.5,
+        "availablity": 100,
+        "size": "200 mL",
+        "description": "Our signature 100% Fresh Cherry juice is a pure, natural juice brought to you straight from the fruit, it's unlike any other.",
+        "calories": 85
+    },
+    {
+        "id": 0,
+        "name": "Rasperries Juicessss",
+        "price": 2.5,
+        "availablity": 100,
+        "size": "200 mL",
+        "description": "Our signature 100% Fresh Rasperries juice is a pure, natural juice brought to you straight from the fruit, it's unlike any other.",
+        "calories": 80
+    }
+]

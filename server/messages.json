@@ -1,0 +1,15 @@
+{
+    "en": {
+        "App_Title": "Propseum Ecommerce",
+        "generalError": "An error occured",
+        "missingAuthorizationHeader": "Missing authorization header",
+        "invalidAuthorizationHeader": "Invalid authorization header",
+        "forbidden": "Action is not allowed",
+        "missingInfo": "Missing information",
+        "pageNotFound": "Page Not Found",
+        "invalidCredentials": "Invalid credentials",
+        "missingUserOrPass": "Missing user name or passowrd",
+        "noUserFound": "No user found",
+        "problemFindingUser": "There was a problem finding the user"
+    }
+}
