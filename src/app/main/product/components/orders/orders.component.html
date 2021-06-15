@@ -1,0 +1,30 @@
+
+<div fxLayout="column" fxFill fxLayoutGap="20px">
+    <div>
+      <p-button label="Back" styleClass="p-button-link" routerLink="/main/products" icon="pi pi-chevron-left"></p-button>
+    </div>
+  <p-card>
+    <h2>Orders</h2>
+    <p-table [value]="orders">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>User</th>
+                <th>Total</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+            <tr>
+                <td>{{order.id}}</td>
+                <td>{{order.user}}</td>
+                <td>{{order.total}} USD</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    
+     
+  </p-card>
+     
+  </div>
+  

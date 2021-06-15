@@ -1,0 +1,29 @@
+
+  <p-button *ngIf="role === '1'" label="Add new product" styleClass="p-button-primary"  icon="pi pi-plus" [routerLink]="'/main/products/edit/new'"></p-button>
+
+  <div  fxLayout="row wrap" 
+  fxLayout.lt-sm="column" 
+  fxLayoutGap="32px" 
+  fxLayoutAlign="flex-start" class="products-wrapper">
+
+    <p-card  fxFlex="0 1 calc(33.3% - 32px)"
+    fxFlex.lt-md="0 1 calc(50% - 32px)"
+    fxFlex.lt-sm="100%"  *ngFor="let product of products$ | async" [header]="product.name" [subheader]="product.price+ ' USD'" styleClass="p-card-shadow"  >
+      <ng-template pTemplate="header">
+          <img *ngIf = "product.imageURL"  alt="product img" [src]="product.imageURL">
+      </ng-template>
+      <!-- <p>{{product.description}}</p> -->
+      <ng-template pTemplate="footer">
+          <p-button *ngIf="role === '1'" label="Edit" styleClass="p-button-primary"  icon="pi pi-pencil" [routerLink]="'/main/products/edit/'+product.id"></p-button>
+
+          <p-button *ngIf="role === '2'" label="Add to cart" styleClass="p-button-primary"  icon="pi pi-shopping-cart" (click)="addtocart(product)"></p-button>
+
+          <p-button  *ngIf="role === '1'" label="Remove" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'} " (click)="removeProduct(product)" ></p-button>
+
+          <p-button  *ngIf="role === '2'" label="Details" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'} " [routerLink]="'/main/products/product/'+product.id" ></p-button>
+      </ng-template>
+  </p-card>
+
+</div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

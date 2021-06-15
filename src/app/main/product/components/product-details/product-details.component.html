@@ -1,0 +1,37 @@
+
+
+<div fxLayout="column" fxFill fxLayoutGap="20px">
+  <div>
+    <p-button label="Back" styleClass="p-button-link" routerLink="/main/products" icon="pi pi-chevron-left"></p-button>
+  </div>
+<p-card>
+  <div fxLayout="row" fxFlex="0 1 100%" fxLayout.lt-md="column" [style]="{margin:'30px 0'}" styleClass="p-card-shadow">
+    <div style="padding:50px;min-width:30vw">
+      <img *ngIf = "product.imageURL" alt="Card" [src]="product.imageURL">
+    </div>
+    <div style="padding:50px;min-width:50vw">
+      <div class="title">{{product.name}}</div>
+      <div class="sub-title">{{product.calories}} Calories</div>
+      <div class="text-block">
+        <span class="h4 text-block">{{product.description}}</span>
+      </div>
+
+      <div class="h4 text-block">
+        <h4>Size: {{product.size}}</h4>
+      </div>
+      <div class="price">{{product.price}} <small>USD</small></div>
+      
+      <div style="float:right">
+      <p-button label="Add to cart" styleClass="p-button-primary"  icon="pi pi-shopping-cart" (click)="addtocart(product)"></p-button></div>
+      <!-- <div class="h4 text-block">
+        <h4>Calories: </h4>
+      </div> -->
+
+    </div>
+    
+   
+
+  </div>
+</p-card>
+   
+</div>

@@ -1,19 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var Order = require('./Order')
-var XLSX = require('xlsx');
-var OrderView = require('./OrderView');
+var Order = require('./OrderFunctions');
+var jwt = require('../Services/jwtAuthorization');
 
+router.get('/', jwt.checkAuth ,Order.getOrders);
 
-router.get('/', OrderView.getOrders);
+router.get('/:id', jwt.checkAuth, Order.getOrderById);
 
-router.get('/:id', OrderView.getOrders);
+router.post('/', jwt.checkAuth, Order.createOrder);
 
-router.post('/', OrderView.createOrder);
-
-router.put('/add', OrderView.addProduct);
-
-router.put('/remove', OrderView.removeProduct);
 
 
 module.exports = router;

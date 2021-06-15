@@ -1,0 +1,93 @@
+
+ <div class="auth-wrapper">
+
+  <div class="auth-content">
+   <div>
+    <p-button label="Back" styleClass="p-button-link" routerLink="/main/products" icon="pi pi-chevron-left"></p-button>
+  </div>
+    <p-card id="productForm"  id="productForm" class="mat-elevation-z8">
+
+
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <div fxLayout="column" >
+          <h2>Product details</h2>
+        </div>
+        <form [formGroup]="productForm" class="login-form" fxLayout="column" fxFill fxLayoutGap="20px">
+  
+          <div fxLayout="column" fxLayoutGap="20px">
+  
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>Name</span></div> 
+              <input pInputText type="text" formControlName="name" placeholder="Enter product name" />
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!productForm.controls['name'].valid && productForm.controls['name'].dirty">
+                Name is required
+              </div>
+            </div>
+  
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>Price</span></div> 
+
+              <p-inputNumber formControlName="price" inputId="currency-us" mode="currency" currency="USD" locale="en-US">
+              </p-inputNumber>
+
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!productForm.controls['price'].valid && productForm.controls['price'].dirty">
+                Price is required
+              </div>
+            </div>
+
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>Availability</span></div> 
+              <p-inputNumber inputId="integeronly" formControlName="availability">
+              </p-inputNumber>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!productForm.controls['availability'].valid && productForm.controls['availability'].dirty">
+                Availability is required
+              </div>
+            </div>
+
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>Size</span></div> 
+              <input pInputText type="text" formControlName="size" placeholder="Enter product size" />
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!productForm.controls['size'].valid && productForm.controls['size'].dirty">
+                Size is required
+              </div>
+            </div>
+
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>Description</span></div>
+
+              <textarea formControlName="description"  pInputTextarea></textarea>  
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!productForm.controls['description'].valid && productForm.controls['description'].dirty">
+                Description is required
+              </div>
+            </div>
+
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>Calories</span></div> 
+              <p-inputNumber inputId="integeronly" formControlName="calories">
+              </p-inputNumber>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!productForm.controls['name'].valid && productForm.controls['name'].dirty">
+                Name is required
+              </div>
+            </div>
+           
+  
+  
+           
+          </div>
+          <div fxLayout="column" fxLayoutGap="40px">
+  
+            <div>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <button pButton type="submit" label="Save" fxFlex="50" [disabled]="productForm.invalid || submitInProgress" (click)="save()"></button>
+              </div>
+              
+            </div>
+          </div>
+  
+        </form>
+      </div>
+  
+    </p-card>
+   
+  </div>
+</div>

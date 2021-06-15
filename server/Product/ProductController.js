@@ -1,17 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var Product = require('./Product')
 var ProductView = require('./ProductFunctions');
-// var jwt = require('../../Services/jwtAuthorization');
+var jwt = require('../Services/jwtAuthorization');
 
-router.get('/', ProductView.getProducts);
+router.get('/', jwt.checkAuth, ProductView.getProducts);
 
-router.get('/:id', ProductView.getProducts);
+router.get('/:id', jwt.checkAuth, ProductView.getProductById);
 
-router.post('/', ProductView.createProduct);
+router.post('/', jwt.checkAuth,  ProductView.createProduct);
 
-router.put('/:id', ProductView.editProduct);
+router.put('/:id', jwt.checkAuth, ProductView.editProduct);
 
-router.delete('/:id', ProductView.deleteProduct);
+router.delete('/:id', jwt.checkAuth, ProductView.deleteProduct);
 
 module.exports = router;

@@ -96,6 +96,22 @@ const fs = require('fs')
 
 }
 
+function getProductById(req, res) {
+    //get the productId from url
+    const productId = req.params.id
+
+    //get the existing product data
+    const existProducts = getProductData()
+
+    //check if the productname exist or not       
+    const findExist = existProducts.find(product => product.id === productId)
+    if (!findExist) {
+        return res.status(409).send({ error: true, msg: 'product does not exist' })
+    }
+
+    res.status(200).send(findExist)
+}
+
 
 
 const saveProductData = (data) => {
@@ -107,4 +123,4 @@ const getProductData = () => {
     const jsonData = fs.readFileSync(productsFile, 'utf8')
     return JSON.parse(jsonData)
 }
-module.exports = { createProduct, getProducts, editProduct, deleteProduct };
+module.exports = { createProduct,getProductById, getProducts, editProduct, deleteProduct };

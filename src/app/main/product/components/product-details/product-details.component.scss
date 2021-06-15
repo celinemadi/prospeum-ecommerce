@@ -1,0 +1,40 @@
+@import '../../../../../variables';
+.title
+{
+    font-size:30px;
+    color:$success-color;
+    font-weight:400;
+}
+
+.sub-title{
+    font-size: 1em;
+    color: #bdb8b8;
+    font-weight: 400;
+    margin-bottom:1.85714286em;
+}
+
+.text-block{
+    font-size: 1em;
+    line-height: 1.85714286em;
+    color: #666666;
+    font-weight: 400;
+}
+
+img{
+    margin: auto;
+    display: block;
+}
+
+.price{
+    color:$info-color;
+    font-weight:600;
+    font-size:1.5em;
+    small{
+        font-size:0.6em
+    }
+}
+
+
+// p-button.add{
+//     float:right
+// }

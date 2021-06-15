@@ -1,0 +1,100 @@
+
+@import '../../../../../variables';
+@import '../../../../../responsive-variables.scss';
+
+.auth-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-width: 100%;
+    min-height: 100vh;
+
+    a,
+    p > a {
+        color: $theme-heading-color;
+        font-weight: 600;
+    }
+
+    > div {
+        z-index: 5;
+    }
+
+    .auth-content {
+        position: relative;
+        width: 600px;
+        min-width:600px;
+        padding: 15px;
+
+    }
+    @media only screen and (max-width: 768px) {
+        max-width: 360px;
+
+    }
+    @media only screen and (max-width: 575px) {
+        .card {
+            .card-body {
+                padding: 30px 15px;
+            }
+        }
+    }
+
+}
+
+
+
+::ng-deep .icon-title{
+    i{
+        font-size:46px;
+        width:46px;
+        height:46px;
+        color:$success-color
+    }
+}
+
+
+
+:host ::ng-deep p-card{
+  border-radius:16px;
+  padding:24px;
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  position: relative;
+  box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+  background:#FFF;
+
+  .p-card{
+    box-shadow: none;
+  }
+  .link
+  {
+    color:$primary-color;
+    font-weight: 800;
+    text-decoration: underline;
+  }
+}
+
+h2{
+  font-weight:normal;
+  text-align:center;
+
+  @include xs{
+    font-size:14px;
+  }
+
+  sup{
+    opacity:60%
+  }
+}
+
+
+
+::ng-deep .p-inputtext{
+    width:100%!important;
+}
+
+.ui-messages-error{
+    color:$danger-color;
+    font-size:10px;
+}

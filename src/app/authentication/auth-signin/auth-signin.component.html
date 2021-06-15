@@ -1,0 +1,91 @@
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <p-card id="login"  id="login" class="mat-elevation-z8">
+
+
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          
+          <div class="icon-title"><i class="pi pi-user"></i></div>
+          <h2>Sign in</h2>
+        </div>
+        <form [formGroup]="loginForm" class="login-form" fxLayout="column" fxFill fxLayoutGap="20px">
+  
+          <div fxLayout="column" fxLayoutGap="20px">
+  
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>Email</span></div> 
+              <input pInputText type="text" formControlName="email" placeholder="Enter email" />
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].dirty">
+                Email is required
+              </div>
+            </div>
+  
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>Password</span></div>
+              <p-password fxLayout="column" fxFill formControlName="password" [toggleMask]="true"  [feedback]="false"></p-password>
+              <div class="error-messages">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].dirty">
+                  <span *ngIf="loginForm.controls['password'].errors['required']">Password is required</span>
+                </div>
+              </div>
+            </div>
+  
+  
+           
+          </div>
+          <div fxLayout="column" fxLayoutGap="40px">
+  
+            <div>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <button pButton type="submit" label="Submit" fxFlex="50" [disabled]="loginForm.invalid || submitInProgress" (click)="login()"></button>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                Don't have an account?
+                <p-button label="Sign up instead" styleClass="p-button-link" routerLink="/auth/sign-up"></p-button>
+               
+              </div>
+            </div>
+          </div>
+  
+        </form>
+      </div>
+  
+    </p-card>
+   
+  </div>
+</div>
+
+
+ 
+
+<p-toast></p-toast>
+<p-toast position="top-left" key="tl"></p-toast>
+<p-toast position="top-center" key="tc"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+<p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column" style="flex: 1">
+            <div class="p-text-center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="p-grid p-fluid">
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+                </div>
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

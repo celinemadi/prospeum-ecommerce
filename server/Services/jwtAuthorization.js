@@ -5,7 +5,7 @@ var User = require('../User/User');
 var jwt = require('jsonwebtoken');
 var permission = require('./permissionService');
 var util = require('util');
-
+const secret = "9LRnqXTG${W[="
 checkAuth = async function checkAuth(request, response, next) {
   let authHeader = request.headers.authorization;
 
@@ -14,7 +14,8 @@ checkAuth = async function checkAuth(request, response, next) {
       response.status(401).json({ 'message': messages.en.missingAuthorizationHeader });
       return;
     }
-    await jwt.verify(authHeader, "9LRnqXTG${W[="    , async function (err, decoded) {
+    console.log(authHeader)
+    await jwt.verify(authHeader, secret, async function (err, decoded) {
       try {
         if (err) {
           response.status(403).json({
@@ -26,36 +27,24 @@ checkAuth = async function checkAuth(request, response, next) {
           console.log("------------- JWTDecoded -------------");
           console.log(util.inspect(decoded));
           console.log("------------- End JWTDecoded -------------");
-          var currentUser = await User.getCurrentUser(decoded.id);
+          var currentUser = await User.getUserById(decoded.id);
           console.log("currentUser", currentUser);
 
 
-          if (currentUser == null) {
+          if (currentUser === null || currentUser === undefined) {
             console.log("step1");
 
             return response.status(422).send({ "message": messages.en.noUserFound });
           }
-          // comparing current JWT code with the one existing in the Databse.
-          if (currentUser.codeforJWT != decoded.codeforJWT) {
-            console.log("step2");
-            
-            return response.status(401).send({ "message": messages.en.forbidden });
-
-          }
-          console.log("currentUser: " + currentUser.fullName);
-          if (currentUser === null || currentUser === undefined) {
-            console.log("step3");
-
-            return response.status(422).send({ "message": messages.en.noUserFound });
-          }
+          
+          
           else {
-            console.log("step4");
+            console.log("step2");
 
-            response.locals.user = currentUser;
-            console.log("----User phoneNumber---- " + currentUser.phoneNumber);
+            console.log("----User email---- " + currentUser.email);
  
             
-            if (permission.checkPermission(currentUser, request) == true && currentUser.phoneNumber) {
+            if (permission.checkPermission(currentUser, request) == true && currentUser.email) {
               console.log("----Checking user permission----");
               next();
             }
@@ -82,4 +71,17 @@ checkAuth = async function checkAuth(request, response, next) {
 }
 
 
+authenticate = function(user){
+  const token = jwt.sign({ id: user.id, role:user.role, firstname:user.firstname, lastname:user.lastname, email:user.email }, secret, { expiresIn: '7d' });
+  return {
+    ...omitPassword(user),
+    token
+  };        
+}
+function omitPassword(user) {
+  const { password, ...userWithoutPassword } = user;
+  return userWithoutPassword;
+}
+
 exports.checkAuth = checkAuth;
+exports.authenticate = authenticate;

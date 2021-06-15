@@ -1,0 +1,24 @@
+<div id="main">
+  <p-menubar *ngIf="role==='1'" [model]="adminItems" styleClass="menu">
+  </p-menubar>
+  <p-menubar *ngIf="role==='2'" [model]="clientItems" styleClass="menu">
+  </p-menubar>
+  <div class="content-wrapper" style="width:90%;margin:auto;margin-top:30px">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<p-dialog header="Cart" [(visible)]="display">
+  <div *ngIf="productsInCart && productsInCart.length>0;else empty">
+    <ul>
+      <li *ngFor="let p of productsInCart">
+        {{p.quantity}} {{p.name}} {{p.price}}
+      </li>
+    </ul>
+    <button pButton type="Proceed" label="Save" fxFlex="50" (click)="addOrder()"></button>
+  </div>
+  
+  <ng-template #empty>
+    Cart is empty. Add some products!
+  </ng-template>
+</p-dialog>

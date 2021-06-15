@@ -1,0 +1,56 @@
+
+
+
+ <div class="auth-wrapper">
+
+  <div class="auth-content">
+   <div>
+    <p-button label="Back" styleClass="p-button-link" routerLink="/main/products" icon="pi pi-chevron-left"></p-button>
+  </div>
+    <p-card id="userForm"  id="userForm" class="mat-elevation-z8">
+
+
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <div fxLayout="column" >
+          <h2>Profile</h2>
+        </div>
+        <form [formGroup]="userForm" class="login-form" fxLayout="column" fxFill fxLayoutGap="20px" *ngIf="user">
+  
+          <div fxLayout="column" fxLayoutGap="20px">
+  
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>First name</span></div> 
+              <input pInputText type="text" formControlName="firstname" placeholder="Enter firstname" />
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userForm.controls['firstname'].valid && userForm.controls['firstname'].dirty">
+                Firstname is required
+              </div>
+            </div>
+  
+            <div fxLayout="column" fxFill>
+              <div style="margin-bottom:5px"><span>Last name</span></div> 
+              <input pInputText type="text" formControlName="lastname" placeholder="Enter lastname " />
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userForm.controls['lastname'].valid && userForm.controls['lastname'].dirty">
+                Lastname is required
+              </div>
+            </div>
+  
+        
+           
+          </div>
+          <div fxLayout="column" fxLayoutGap="40px">
+  
+            <div>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <button pButton type="submit" label="Save" fxFlex="50" [disabled]="userForm.invalid || submitInProgress" (click)="save()"></button>
+              </div>
+              
+            </div>
+          </div>
+  
+        </form>
+      </div>
+  
+    </p-card>
+   
+  </div>
+</div>

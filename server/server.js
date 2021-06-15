@@ -11,19 +11,20 @@ app.use(cors());
 var v1 = express.Router();
 
 var ProductController = require('./Product/ProductController');
-// var OrderController = require('./Order/OrderController');
-// var SignUp = require('./Models/User/SignUp');
-// var Login = require('./Models/User/Login');
-
+var OrderController = require('./Order/OrderController');
+var SignUp = require('./User/SignUp');
+var Login = require('./User/Login');
+var Edit = require('./User/Edit')
 v1.use(function (req, res, next) {
   req.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
 v1.use('/products', ProductController);
-// v1.use('/order', jwtAuth.checkAuth, OrderController);
-// v1.use('/signup', SignUp);
-// v1.use('/login', Login);
+v1.use('/orders', OrderController);
+v1.use('/signup', SignUp);
+v1.use('/login', Login);
+v1.use('/user',Edit)
 
 
 app.use('/apidoc', express.static(path.join(__dirname, 'apidoc')));

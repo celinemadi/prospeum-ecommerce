@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+var salt = bcrypt.genSaltSync(saltRounds);
 var User = require('./User');
 var messages = require('../messages.json');
-
-
+var generalService = require('../Services/generalServices')
 
 /* CREATES A NEW USER*/
 router.post('/', async function (req, res) {
@@ -14,28 +14,29 @@ router.post('/', async function (req, res) {
     try {
 
         console.log("\n\n----- sign up request -----\n", req.body);
-        var role = req.body.role;
-        // if(req.body=={}){
-        //     console.log()
-        // }
-        var newUser = new User();
-        newUser.setUser(req.body);
-
+        var newUser = req.body;
         console.log("newUser", newUser);
-        var exists = await User.findOne({ phoneNumber: req.body.phoneNumber });
+        var exists = User.findUser(req.body.email);
         if(!exists){
-            await newUser.save();
-            msg = newUser;
-            status = 200;
+            newUser.password=  bcrypt.hashSync(newUser.password, salt);
+            newUser.id = generalService.makeRandomId()
+            var createdMessage = User.createUser(newUser);
+            if(createdMessage.success){
+                msg = newUser;
+                status = 200;
+            }
+            else{
+                msg = {error:"Error creating user"}
+                status = 500; 
+            }
+           
         }
         else{
-            msg = "User with this phone number exists"
+            msg = {error:"User with this email  exists"}
             status = 401;
         }
         return res.status(status).send(msg);
         
-        // var result = await createAuthorization(userAndPhone, newUser, req);
-
     }
     catch (error) {
         if (!error.status) {

@@ -6,24 +6,42 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { ProductsListComponent } from './product/components/products-list/products-list.component';
-import { ProductDetailsComponent } from './product/components/product-details/product-details.component';
-import { ProductResolver } from './product/product.resolver';
-import { ProductModule } from './product/product.module';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
+import { FlexModule } from '@angular/flex-layout';
+import { ProgressModule } from './components';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthGuardService as Authguard } from './authentication/auth-guard.service';
+import { MainComponent } from './main/main.component';
+import { JwtInterceptorService } from './authentication/jwt-interceptor.service';
+import { MessageService } from 'primeng/api';
+import { ProductService } from './main/product/services/product.service';
+
 const routes = [
+
   {
-    path: 'products',
-    component: ProductsListComponent,
-    resolve: {
-      products: ProductResolver
-    }
+    path: '',
+    redirectTo: '/main/products',
+    pathMatch: 'full'
   },
-  {path: 'product/:id', component: ProductDetailsComponent},
-  {path: '**', redirectTo: 'products'}
-];
+  {
+    path: 'auth',
+    loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
+  },
+
+
+  {
+    path: 'main',
+    component: MainComponent,
+    canActivate: [Authguard],
+
+    loadChildren: () => import('./main/main.module').then(m => m.MainModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'sign-in',
+  },];
 
 @NgModule({
   declarations: [
@@ -31,14 +49,17 @@ const routes = [
   ],
   imports: [
     BrowserModule,
-    ProductModule,
+    ProgressModule,
+    BrowserAnimationsModule,
     HttpClientModule,
+    FlexModule,
     RouterModule.forRoot(routes),
     EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [ProductResolver],
+  providers: [MessageService,ProductService,    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

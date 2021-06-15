@@ -1,0 +1,27 @@
+@import '../../responsive-variables.scss';
+
+:host ::ng-deep  .menu{
+    //background-color:#3f51b5;
+ 
+    @include lg{
+        > p-menubarsub{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            > ul{
+                justify-content: space-between;
+                display: flex;
+                width: 100%;
+                }
+            
+        }
+    }
+    
+    
+
+}
+
+ul{
+    list-style: none;
+    padding:0;
+}
